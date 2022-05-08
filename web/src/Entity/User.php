@@ -20,17 +20,17 @@ class User
     /**
      * @ORM\Column(type="datetime")
      */
-    private \Datetime $createdAt;
+    private \DateTime $createdAt;
 
     /**
      * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
      */
-    private \Datetime $updatedAt;
+    private \DateTime $updatedAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private \Datetime $deletedAt;
+    private \DateTime $deletedAt;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -47,111 +47,75 @@ class User
      */
     private $workEntry;
 
-    /**
-     * @return int
-     */
     public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @param int $id
-     * @return User
-     */
     public function setId(int $id): User
     {
         $this->id = $id;
+
         return $this;
     }
 
-    /**
-     * @return \Datetime
-     */
-    public function getCreatedAt(): \Datetime
+    public function getCreatedAt(): \DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * @param \Datetime $createdAt
-     * @return User
-     */
-    public function setCreatedAt(\Datetime $createdAt): User
+    public function setCreatedAt(\DateTime $createdAt): User
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
-    /**
-     * @return \Datetime
-     */
-    public function getUpdatedAt(): \Datetime
+    public function getUpdatedAt(): \DateTime
     {
         return $this->updatedAt;
     }
 
-    /**
-     * @param \Datetime $updatedAt
-     * @return User
-     */
-    public function setUpdatedAt(\Datetime $updatedAt): User
+    public function setUpdatedAt(\DateTime $updatedAt): User
     {
         $this->updatedAt = $updatedAt;
+
         return $this;
     }
 
-    /**
-     * @return \Datetime
-     */
-    public function getDeletedAt(): \Datetime
+    public function getDeletedAt(): \DateTime
     {
         return $this->deletedAt;
     }
 
-    /**
-     * @param \Datetime $deletedAt
-     * @return User
-     */
-    public function setDeletedAt(\Datetime $deletedAt): User
+    public function setDeletedAt(\DateTime $deletedAt): User
     {
         $this->deletedAt = $deletedAt;
+
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     * @return User
-     */
     public function setName(string $name): User
     {
         $this->name = $name;
+
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * @param string $email
-     * @return User
-     */
     public function setEmail(string $email): User
     {
         $this->email = $email;
+
         return $this;
     }
 
@@ -165,11 +129,13 @@ class User
 
     /**
      * @param mixed $workEntry
+     *
      * @return User
      */
     public function setWorkEntry($workEntry)
     {
         $this->workEntry = $workEntry;
+
         return $this;
     }
 }
