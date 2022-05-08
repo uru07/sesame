@@ -45,10 +45,8 @@ class UserController extends AbstractController
         return $this->json($user->getId());
     }
 
-    public function removeUser(Request $request): JsonResponse
+    public function removeUser(Request $request, int $id): JsonResponse
     {
-        $id = $request->request->get('id');
-
         try {
             $user = $this->userService->removeUser($id);
         } catch (\Exception $e) {

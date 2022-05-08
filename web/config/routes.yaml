@@ -9,7 +9,7 @@ app_user_edit:
     methods: [PUT]
 
 app_user_remove:
-    path: /user
+    path: /user/{id}
     controller: App\Controller\UserController::removeUser
     methods: [DELETE]
 
@@ -34,7 +34,7 @@ app_work_entry_edit:
     methods: [PUT]
 
 app_work_entry_remove:
-    path: /work-entry
+    path: /work-entry/{id}
     controller: App\Controller\WorkEntryController::removeWorkEntry
     methods: [DELETE]
 
