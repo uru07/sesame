@@ -56,7 +56,7 @@ class WorkEntryService
 
     public function removeWorkEntry(int $id): WorkEntry
     {
-        $workEntry = $this->userRepository->getActiveWorkEntryById($id);
+        $workEntry = $this->workEntryRepository->getActiveWorkEntryById($id);
         if (is_null($workEntry)) {
             throw new \Exception('Work entry not found');
         }
@@ -64,7 +64,17 @@ class WorkEntryService
         $today = new \DateTime();
 
         $workEntry->setDeletedAt($today);
-        $this->userRepository->persist($workEntry);
+        $this->workEntryRepository->persist($workEntry);
+
+        return $workEntry;
+    }
+
+    public function getAllActiveWorkEntryById(int $id): WorkEntry
+    {
+        $workEntry = $this->workEntryRepository->getActiveWorkEntryById($id);
+        if (is_null($workEntry)) {
+            throw new \Exception('Work entry not found');
+        }
 
         return $workEntry;
     }

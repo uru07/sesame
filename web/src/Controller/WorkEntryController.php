@@ -39,12 +39,12 @@ class WorkEntryController extends AbstractController
         $endDate = $request->request->get('endDate', null);
 
         try {
-            $user = $this->workEntryService->editWorkEntry($id, $startDate, $endDate);
+            $workEntry = $this->workEntryService->editWorkEntry($id, $startDate, $endDate);
         } catch (\Exception $e) {
             return $this->json(['error' => $e->getMessage()], $e->getCode());
         }
 
-        return $this->json($user->getId());
+        return $this->json($workEntry->getId());
     }
 
     public function removeWorkEntry(Request $request): JsonResponse
@@ -52,11 +52,18 @@ class WorkEntryController extends AbstractController
         $id = $request->request->get('id');
 
         try {
-            $user = $this->workEntryService->removeWorkEntry($id);
+            $workEntry = $this->workEntryService->removeWorkEntry($id);
         } catch (\Exception $e) {
             return $this->json(['error' => $e->getMessage()], $e->getCode());
         }
 
-        return $this->json($user->getId());
+        return $this->json($workEntry->getId());
+    }
+
+    public function getWorkEntryById(Request $request, int $id): JsonResponse
+    {
+        $workEntry = $this->workEntryService->getAllActiveWorkEntryById($id);
+
+        return $this->json($workEntry->toArray());
     }
 }

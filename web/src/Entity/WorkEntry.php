@@ -130,4 +130,16 @@ class WorkEntry
 
         return $this;
     }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'userId' => $this->userId,
+            'created_at' => $this->createdAt,
+            'updated_at' => $this->updatedAt,
+            'startDate' => $this->startDate,
+            'endDate' => $this->endDate,
+        ];
+    }
 }

@@ -37,3 +37,8 @@ app_work_entry_remove:
     path: /work-entry
     controller: App\Controller\WorkEntryController::removeWorkEntry
     methods: [DELETE]
+
+app_work_entry_get:
+    path: /work-entry/{id}
+    controller: App\Controller\WorkEntryController::getWorkEntryById
+    methods: [GET]
