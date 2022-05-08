@@ -30,4 +30,26 @@ class UserService
 
         return $user;
     }
+
+    /**
+     * @throws \Exception
+     */
+    public function editUser(int $id, string $name, string $email): User
+    {
+        $today = new \DateTime();
+
+        $user = $this->userRepository->find($id);
+        if (is_null($user)) {
+            throw new \Exception('User not found');
+        }
+
+        $user->setUpdatedAt($today)
+            ->setName($name)
+            ->setEmail($email)
+        ;
+
+        $this->userRepository->persist($user);
+
+        return $user;
+    }
 }
