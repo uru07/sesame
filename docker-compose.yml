@@ -1,0 +1,54 @@
+version: '3.4'
+
+services:
+  symfony:
+    container_name: sesame_symfony
+    restart: unless-stopped
+    cpus: 2
+    mem_limit: 4g
+    environment:
+      - TZ=Europe/Madrid
+      - DEBIAN_FRONTEND=noninteractive
+    build:
+      context: .
+    ports:
+      - 80:80
+    volumes:
+      - ./web:/var/www/html
+      - ./cron.d:/etc/cron.d
+      - ./composer.www-data:/var/www/.composer
+      - ./supervisor/messenger-worker.conf:/etc/supervisor/conf.d/messenger-worker.conf:ro
+    networks:
+      - sesame-network
+      
+  phpmyadmin:
+    container_name: phpmyadmin-5.7
+    image: phpmyadmin
+    ports:
+      - 12254:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOSTS=mysql-5.7
+      - PMA_PORTS=3306
+      - UPLOAD_LIMIT=200M
+      - PMA_USER=root
+      - PMA_PASSWORD=a6854asd84xa
+    networks:
+      - sesame-network
+
+  mysql:
+    container_name: mysql-5.7
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: a6854asd84xa
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+    ports:
+      - 3306:3306
+    networks:
+      - sesame-network
+
+networks:
+  sesame-network:
+    driver: bridge
