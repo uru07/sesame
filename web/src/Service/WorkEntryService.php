@@ -23,13 +23,18 @@ class WorkEntryService
     {
         $today = new \DateTime();
         $user = $this->userRepository->find($userId);
+        $startDate = new \DateTime($startDate);
+        $endDate = $endDate ? new \DateTime($endDate) : null;
+        if (!$this->checkDates($startDate, $endDate)) {
+            throw new \Exception('End date must be grater than start date');
+        }
 
         $workEntry = new WorkEntry();
         $workEntry->setUserId($user)
             ->setCreatedAt($today)
             ->setUpdatedAt($today)
-            ->setStartDate(new \DateTime($startDate))
-            ->setEndDate($endDate ? new \DateTime($endDate) : $endDate)
+            ->setStartDate($startDate)
+            ->setEndDate($endDate)
         ;
         $this->workEntryRepository->persist($workEntry);
 
@@ -44,10 +49,15 @@ class WorkEntryService
         }
 
         $today = new \DateTime();
+        $startDate = new \DateTime($startDate);
+        $endDate = $endDate ? new \DateTime($endDate) : null;
+        if (!$this->checkDates($startDate, $endDate)) {
+            throw new \Exception('End date must be grater than start date');
+        }
 
         $workEntry->setUpdatedAt($today)
-            ->setStartDate(new \DateTime($startDate))
-            ->setEndDate($endDate ? new \DateTime($endDate) : $endDate)
+            ->setStartDate($startDate)
+            ->setEndDate($endDate)
         ;
         $this->workEntryRepository->persist($workEntry);
 
@@ -94,5 +104,14 @@ class WorkEntryService
         }
 
         return $workEntriesArray;
+    }
+
+    private function checkDates(\DateTime $startDate, ?\DateTime $endDate): bool
+    {
+        if (is_null($endDate)) {
+            return true;
+        }
+
+        return $startDate < $endDate;
     }
 }
