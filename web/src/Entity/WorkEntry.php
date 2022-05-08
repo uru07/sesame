@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
+use App\Repository\WorkEntryRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ORM\Entity(repositoryClass=WorkEntryRepository::class)
  */
-class User
+class WorkEntry
 {
     /**
      * @ORM\Id()
@@ -16,6 +16,11 @@ class User
      * @ORM\Column(type="integer")
      */
     private int $id;
+
+    /**
+     *  @ORM\ManyToOne(targetEntity="User", inversedBy="workEntry")
+     */
+    private User $userId;
 
     /**
      * @ORM\Column(type="datetime")
@@ -33,19 +38,14 @@ class User
     private \Datetime $deletedAt;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="datetime")
      */
-    private string $name;
+    private \DateTime $startDate;
 
     /**
-     * @ORM\Column(type="string", length=250)
+     * @ORM\Column(type="datetime", nullable=true)
      */
-    private string $email;
-
-    /**
-     *  @ORM\OneToMany(targetEntity="WorkEntry", mappedBy="userId")
-     */
-    private $workEntry;
+    private \DateTime $endDate;
 
     /**
      * @return int
@@ -57,11 +57,29 @@ class User
 
     /**
      * @param int $id
-     * @return User
+     * @return WorkEntry
      */
-    public function setId(int $id): User
+    public function setId(int $id): WorkEntry
     {
         $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUserId(): User
+    {
+        return $this->userId;
+    }
+
+    /**
+     * @param User $userId
+     * @return WorkEntry
+     */
+    public function setUserId(User $userId): WorkEntry
+    {
+        $this->userId = $userId;
         return $this;
     }
 
@@ -75,9 +93,9 @@ class User
 
     /**
      * @param \Datetime $createdAt
-     * @return User
+     * @return WorkEntry
      */
-    public function setCreatedAt(\Datetime $createdAt): User
+    public function setCreatedAt(\Datetime $createdAt): WorkEntry
     {
         $this->createdAt = $createdAt;
         return $this;
@@ -93,9 +111,9 @@ class User
 
     /**
      * @param \Datetime $updatedAt
-     * @return User
+     * @return WorkEntry
      */
-    public function setUpdatedAt(\Datetime $updatedAt): User
+    public function setUpdatedAt(\Datetime $updatedAt): WorkEntry
     {
         $this->updatedAt = $updatedAt;
         return $this;
@@ -111,65 +129,47 @@ class User
 
     /**
      * @param \Datetime $deletedAt
-     * @return User
+     * @return WorkEntry
      */
-    public function setDeletedAt(\Datetime $deletedAt): User
+    public function setDeletedAt(\Datetime $deletedAt): WorkEntry
     {
         $this->deletedAt = $deletedAt;
         return $this;
     }
 
     /**
-     * @return string
+     * @return \DateTime
      */
-    public function getName(): string
+    public function getStartDate(): \DateTime
     {
-        return $this->name;
+        return $this->startDate;
     }
 
     /**
-     * @param string $name
-     * @return User
+     * @param \DateTime $startDate
+     * @return WorkEntry
      */
-    public function setName(string $name): User
+    public function setStartDate(\DateTime $startDate): WorkEntry
     {
-        $this->name = $name;
+        $this->startDate = $startDate;
         return $this;
     }
 
     /**
-     * @return string
+     * @return \DateTime
      */
-    public function getEmail(): string
+    public function getEndDate(): \DateTime
     {
-        return $this->email;
+        return $this->endDate;
     }
 
     /**
-     * @param string $email
-     * @return User
+     * @param \DateTime $endDate
+     * @return WorkEntry
      */
-    public function setEmail(string $email): User
+    public function setEndDate(\DateTime $endDate): WorkEntry
     {
-        $this->email = $email;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getWorkEntry()
-    {
-        return $this->workEntry;
-    }
-
-    /**
-     * @param mixed $workEntry
-     * @return User
-     */
-    public function setWorkEntry($workEntry)
-    {
-        $this->workEntry = $workEntry;
+        $this->endDate = $endDate;
         return $this;
     }
 }
