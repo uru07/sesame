@@ -78,4 +78,21 @@ class WorkEntryService
 
         return $workEntry;
     }
+
+    public function getAllActiveWorkEntryByUserId(int $userId): array
+    {
+        $workEntry = $this->workEntryRepository->getActiveWorkEntryByUserId($userId);
+
+        return $this->workEntriesToArray($workEntry);
+    }
+
+    private function workEntriesToArray(array $workEntries): array
+    {
+        $workEntriesArray = [];
+        foreach ($workEntries as $workEntry) {
+            $workEntriesArray[] = $workEntry->toArray();
+        }
+
+        return $workEntriesArray;
+    }
 }

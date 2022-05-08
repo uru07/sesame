@@ -66,4 +66,11 @@ class WorkEntryController extends AbstractController
 
         return $this->json($workEntry->toArray());
     }
+
+    public function getWorkEntryByUserId(Request $request, int $userId): JsonResponse
+    {
+        $workEntry = $this->workEntryService->getAllActiveWorkEntryByUserId($userId);
+
+        return $this->json($workEntry);
+    }
 }

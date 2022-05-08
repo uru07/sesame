@@ -30,6 +30,17 @@ class WorkEntryRepository extends ServiceEntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
+    public function getActiveWorkEntryByUserId(int $userId): array
+    {
+        $qb = $this->createQueryBuilder('workEntry')
+            ->andWhere('workEntry.userId = :id')
+            ->andWhere('workEntry.deletedAt IS NULL')
+            ->setParameter('id', $userId)
+        ;
+
+        return $qb->getQuery()->execute();
+    }
+
     public function getActiveWorkEntry(): array
     {
         $qb = $this->createQueryBuilder('workEntry')
