@@ -23,7 +23,7 @@ class UserController extends AbstractController
         $email = $request->request->get('email');
 
         try {
-            $user = $this->userService->createNewUser($name, $email);
+            $user = $this->userService->addUser($name, $email);
         } catch (\Exception $e) {
             return $this->json(['error' => $e->getMessage()], $e->getCode());
         }
@@ -39,6 +39,19 @@ class UserController extends AbstractController
 
         try {
             $user = $this->userService->editUser($id, $name, $email);
+        } catch (\Exception $e) {
+            return $this->json(['error' => $e->getMessage()], $e->getCode());
+        }
+
+        return $this->json($user->getId());
+    }
+
+    public function removeUser(Request $request): JsonResponse
+    {
+        $id = $request->request->get('id');
+
+        try {
+            $user = $this->userService->removeUser($id);
         } catch (\Exception $e) {
             return $this->json(['error' => $e->getMessage()], $e->getCode());
         }

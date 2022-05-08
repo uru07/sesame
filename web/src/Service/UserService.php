@@ -15,7 +15,7 @@ class UserService
         $this->userRepository = $userRepository;
     }
 
-    public function createNewUser(string $name, string $email): User
+    public function addUser(string $name, string $email): User
     {
         $today = new \DateTime();
 
@@ -25,7 +25,6 @@ class UserService
             ->setName($name)
             ->setEmail($email)
         ;
-
         $this->userRepository->persist($user);
 
         return $user;
@@ -36,18 +35,35 @@ class UserService
      */
     public function editUser(int $id, string $name, string $email): User
     {
-        $today = new \DateTime();
-
-        $user = $this->userRepository->find($id);
+        $user = $this->userRepository->getUserToEdit($id);
         if (is_null($user)) {
             throw new \Exception('User not found');
         }
+
+        $today = new \DateTime();
 
         $user->setUpdatedAt($today)
             ->setName($name)
             ->setEmail($email)
         ;
+        $this->userRepository->persist($user);
 
+        return $user;
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function removeUser(int $id): User
+    {
+        $user = $this->userRepository->getUserToDelete($id);
+        if (is_null($user)) {
+            throw new \Exception('User not found');
+        }
+
+        $today = new \DateTime();
+
+        $user->setDeletedAt($today);
         $this->userRepository->persist($user);
 
         return $user;
