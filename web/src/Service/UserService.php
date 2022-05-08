@@ -72,7 +72,17 @@ class UserService
     /**
      * @throws \Exception
      */
-    public function getUser(int $id): User
+    public function getAllActiveUser(): User
+    {
+        $users = $this->userRepository->getActiveUser();
+
+        return $this->allUsersToArray($users);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function getActiveUser(int $id): User
     {
         $user = $this->userRepository->getActiveUserById($id);
         if (is_null($user)) {
@@ -80,5 +90,15 @@ class UserService
         }
 
         return $user;
+    }
+
+    private function allUsersToArray(array $users): array
+    {
+        $userArray = [];
+        foreach ($users as $user) {
+            $userArray[] = $user->toArray();
+        }
+
+        return $userArray;
     }
 }

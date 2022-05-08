@@ -29,4 +29,13 @@ class UserRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getOneOrNullResult();
     }
+
+    public function getActiveUser(): array
+    {
+        $qb = $this->createQueryBuilder('user')
+            ->andWhere('user.deletedAt IS NULL')
+        ;
+
+        return $qb->getQuery()->execute();
+    }
 }

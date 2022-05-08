@@ -59,10 +59,17 @@ class UserController extends AbstractController
         return $this->json($user->getId());
     }
 
-    public function getUser(Request $request, int $id): JsonResponse
+    public function getAllUser(Request $request): JsonResponse
+    {
+        $users = $this->userService->getAllActiveUser();
+
+        return $this->json($users);
+    }
+
+    public function getUserById(Request $request, int $id): JsonResponse
     {
         try {
-            $user = $this->userService->getUser($id);
+            $user = $this->userService->getActiveUser($id);
         } catch (\Exception $e) {
             return $this->json(['error' => $e->getMessage()], $e->getCode());
         }
