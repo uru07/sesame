@@ -7,7 +7,7 @@
         "php": "8.0.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "doctrine/doctrine-bundle": "2.6.3",
+        "doctrine/doctrine-bundle": "2.63",
         "doctrine/doctrine-migrations-bundle": "3.2.2",
         "doctrine/orm": "2.12.2",
         "friendsofphp/php-cs-fixer": "3.8.0",

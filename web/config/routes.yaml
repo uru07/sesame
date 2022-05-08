@@ -1,7 +1,49 @@
-controllers:
-    resource: ../src/Controller/
-    type: annotation
+app_user_add:
+    path: /user
+    controller: App\Controller\UserController::addUser
+    methods: [POST]
 
-kernel:
-    resource: ../src/Kernel.php
-    type: annotation
+app_user_edit:
+    path: /user/{id}
+    controller: App\Controller\UserController::editUser
+    methods: [PUT]
+
+app_user_remove:
+    path: /user/{id}
+    controller: App\Controller\UserController::removeUser
+    methods: [DELETE]
+
+app_user_get_all:
+    path: /user
+    controller: App\Controller\UserController::getAllUser
+    methods: [GET]
+
+app_user_get:
+    path: /user/{id}
+    controller: App\Controller\UserController::getUserById
+    methods: [GET]
+
+app_work_entry_add:
+    path: /work-entry
+    controller: App\Controller\WorkEntryController::addWorkEntry
+    methods: [POST]
+
+app_work_entry_edit:
+    path: /work-entry/{id}
+    controller: App\Controller\WorkEntryController::editWorkEntry
+    methods: [PUT]
+
+app_work_entry_remove:
+    path: /work-entry/{id}
+    controller: App\Controller\WorkEntryController::removeWorkEntry
+    methods: [DELETE]
+
+app_work_entry_get:
+    path: /work-entry/id/{id}
+    controller: App\Controller\WorkEntryController::getWorkEntryById
+    methods: [GET]
+
+app_work_entry_get_by_user:
+    path: /work-entry/user/{userId}
+    controller: App\Controller\WorkEntryController::getWorkEntryByUserId
+    methods: [GET]
