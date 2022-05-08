@@ -1,7 +1,4 @@
-controllers:
-    resource: ../src/Controller/
-    type: annotation
-
-kernel:
-    resource: ../src/Kernel.php
-    type: annotation
+app_user_add:
+    path: /user
+    controller: App\Controller\UserController::addUser
+    methods: [POST]
