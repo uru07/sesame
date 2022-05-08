@@ -22,3 +22,8 @@ app_user_get:
     path: /user/{id}
     controller: App\Controller\UserController::getUserById
     methods: [GET]
+
+app_work_entry_add:
+    path: /work-entry
+    controller: App\Controller\WorkEntryController::addWorkEntry
+    methods: [POST]
