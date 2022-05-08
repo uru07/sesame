@@ -72,7 +72,7 @@ class UserService
     /**
      * @throws \Exception
      */
-    public function getAllActiveUser(): User
+    public function getAllActiveUser(): array
     {
         $users = $this->userRepository->getActiveUser();
 

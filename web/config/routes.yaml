@@ -4,7 +4,7 @@ app_user_add:
     methods: [POST]
 
 app_user_edit:
-    path: /user
+    path: /user/{id}
     controller: App\Controller\UserController::editUser
     methods: [PUT]
 

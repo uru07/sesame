@@ -31,9 +31,8 @@ class UserController extends AbstractController
         return $this->json($user->getId());
     }
 
-    public function editUser(Request $request): JsonResponse
+    public function editUser(Request $request, int $id): JsonResponse
     {
-        $id = $request->request->get('id');
         $name = $request->request->get('name');
         $email = $request->request->get('email');
 
