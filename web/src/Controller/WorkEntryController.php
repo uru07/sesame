@@ -46,4 +46,17 @@ class WorkEntryController extends AbstractController
 
         return $this->json($user->getId());
     }
+
+    public function removeWorkEntry(Request $request): JsonResponse
+    {
+        $id = $request->request->get('id');
+
+        try {
+            $user = $this->workEntryService->removeWorkEntry($id);
+        } catch (\Exception $e) {
+            return $this->json(['error' => $e->getMessage()], $e->getCode());
+        }
+
+        return $this->json($user->getId());
+    }
 }

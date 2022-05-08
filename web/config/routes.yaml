@@ -32,3 +32,8 @@ app_work_entry_edit:
     path: /work-entry
     controller: App\Controller\WorkEntryController::editWorkEntry
     methods: [PUT]
+
+app_work_entry_remove:
+    path: /work-entry
+    controller: App\Controller\WorkEntryController::removeWorkEntry
+    methods: [DELETE]
