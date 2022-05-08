@@ -4,7 +4,6 @@ namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 class UserRepository extends ServiceEntityRepository
@@ -20,25 +19,13 @@ class UserRepository extends ServiceEntityRepository
         $this->getEntityManager()->flush();
     }
 
-    public function getUserQueryBuilder(int $id): QueryBuilder
+    public function getActiveUserById(int $id): ?User
     {
-        return $this->createQueryBuilder('user')
+        $qb = $this->createQueryBuilder('user')
             ->andWhere('user.id = :id')
-            ->setParameter('id', $id);
-    }
-
-    public function getUserToEdit(int $id): ?User
-    {
-        $qb = $this->getUserQueryBuilder($id);
-        $qb->andWhere('user.deletedAt IS NULL');
-
-        return $qb->getQuery()->getOneOrNullResult();
-    }
-
-    public function getUserToDelete(int $id): ?User
-    {
-        $qb = $this->getUserQueryBuilder($id);
-        $qb->andWhere('user.deletedAt IS NOT NULL');
+            ->andWhere('user.deletedAt IS NULL')
+            ->setParameter('id', $id)
+        ;
 
         return $qb->getQuery()->getOneOrNullResult();
     }

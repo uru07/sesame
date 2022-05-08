@@ -12,3 +12,8 @@ app_user_remove:
     path: /user
     controller: App\Controller\UserController::removeUser
     methods: [DELETE]
+
+app_user_get:
+    path: /user
+    controller: App\Controller\UserController::getUser
+    methods: [GET]

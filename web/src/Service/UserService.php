@@ -35,7 +35,7 @@ class UserService
      */
     public function editUser(int $id, string $name, string $email): User
     {
-        $user = $this->userRepository->getUserToEdit($id);
+        $user = $this->userRepository->getActiveUserById($id);
         if (is_null($user)) {
             throw new \Exception('User not found');
         }
@@ -56,7 +56,7 @@ class UserService
      */
     public function removeUser(int $id): User
     {
-        $user = $this->userRepository->getUserToDelete($id);
+        $user = $this->userRepository->getActiveUserById($id);
         if (is_null($user)) {
             throw new \Exception('User not found');
         }
@@ -65,6 +65,19 @@ class UserService
 
         $user->setDeletedAt($today);
         $this->userRepository->persist($user);
+
+        return $user;
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function getUser(int $id): User
+    {
+        $user = $this->userRepository->getActiveUserById($id);
+        if (is_null($user)) {
+            throw new \Exception('User not found');
+        }
 
         return $user;
     }

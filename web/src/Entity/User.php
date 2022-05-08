@@ -138,4 +138,15 @@ class User
 
         return $this;
     }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'created_at' => $this->createdAt,
+            'updated_at' => $this->updatedAt,
+            'name' => $this->name,
+            'email' => $this->email,
+        ];
+    }
 }
