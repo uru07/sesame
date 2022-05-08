@@ -26,7 +26,7 @@ class WorkEntryController extends AbstractController
         try {
             $workEntry = $this->workEntryService->addWorkEntry($userId, $startDate, $endDate);
         } catch (\Exception $e) {
-            return $this->json(['error' => $e->getMessage()], $e->getCode());
+            return $this->json(['error' => $e->getMessage()]);
         }
 
         return $this->json($workEntry->getId());
@@ -41,7 +41,7 @@ class WorkEntryController extends AbstractController
         try {
             $workEntry = $this->workEntryService->editWorkEntry($id, $startDate, $endDate);
         } catch (\Exception $e) {
-            return $this->json(['error' => $e->getMessage()], $e->getCode());
+            return $this->json(['error' => $e->getMessage()]);
         }
 
         return $this->json($workEntry->getId());
@@ -54,7 +54,7 @@ class WorkEntryController extends AbstractController
         try {
             $workEntry = $this->workEntryService->removeWorkEntry($id);
         } catch (\Exception $e) {
-            return $this->json(['error' => $e->getMessage()], $e->getCode());
+            return $this->json(['error' => $e->getMessage()]);
         }
 
         return $this->json($workEntry->getId());

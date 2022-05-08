@@ -30,7 +30,7 @@ class User
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private \DateTime $deletedAt;
+    private ?\DateTime $deletedAt;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -43,7 +43,7 @@ class User
     private string $email;
 
     /**
-     *  @ORM\OneToMany(targetEntity="WorkEntry", mappedBy="userId")
+     *  @ORM\OneToMany(targetEntity="WorkEntry", mappedBy="user")
      */
     private $workEntry;
 
@@ -83,12 +83,12 @@ class User
         return $this;
     }
 
-    public function getDeletedAt(): \DateTime
+    public function getDeletedAt(): ?\DateTime
     {
         return $this->deletedAt;
     }
 
-    public function setDeletedAt(\DateTime $deletedAt): User
+    public function setDeletedAt(?\DateTime $deletedAt): User
     {
         $this->deletedAt = $deletedAt;
 

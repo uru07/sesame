@@ -20,7 +20,7 @@ class WorkEntry
     /**
      *  @ORM\ManyToOne(targetEntity="User", inversedBy="workEntry")
      */
-    private User $userId;
+    private User $user;
 
     /**
      * @ORM\Column(type="datetime")
@@ -35,7 +35,7 @@ class WorkEntry
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private \DateTime $deletedAt;
+    private ?\DateTime $deletedAt;
 
     /**
      * @ORM\Column(type="datetime")
@@ -45,7 +45,7 @@ class WorkEntry
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private \DateTime $endDate;
+    private ?\DateTime $endDate;
 
     public function getId(): int
     {
@@ -59,14 +59,14 @@ class WorkEntry
         return $this;
     }
 
-    public function getUserId(): User
+    public function getUser(): User
     {
-        return $this->userId;
+        return $this->user;
     }
 
-    public function setUserId(User $userId): WorkEntry
+    public function setUser(User $user): WorkEntry
     {
-        $this->userId = $userId;
+        $this->user = $user;
 
         return $this;
     }
@@ -95,12 +95,12 @@ class WorkEntry
         return $this;
     }
 
-    public function getDeletedAt(): \DateTime
+    public function getDeletedAt(): ?\DateTime
     {
         return $this->deletedAt;
     }
 
-    public function setDeletedAt(\DateTime $deletedAt): WorkEntry
+    public function setDeletedAt(?\DateTime $deletedAt): WorkEntry
     {
         $this->deletedAt = $deletedAt;
 
@@ -119,12 +119,12 @@ class WorkEntry
         return $this;
     }
 
-    public function getEndDate(): \DateTime
+    public function getEndDate(): ?\DateTime
     {
         return $this->endDate;
     }
 
-    public function setEndDate(\DateTime $endDate): WorkEntry
+    public function setEndDate(?\DateTime $endDate): WorkEntry
     {
         $this->endDate = $endDate;
 
@@ -135,7 +135,7 @@ class WorkEntry
     {
         return [
             'id' => $this->id,
-            'userId' => $this->userId,
+            'userId' => $this->user,
             'created_at' => $this->createdAt,
             'updated_at' => $this->updatedAt,
             'startDate' => $this->startDate,

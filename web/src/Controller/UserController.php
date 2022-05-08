@@ -25,7 +25,7 @@ class UserController extends AbstractController
         try {
             $user = $this->userService->addUser($name, $email);
         } catch (\Exception $e) {
-            return $this->json(['error' => $e->getMessage()], $e->getCode());
+            return $this->json(['error' => $e->getMessage()]);
         }
 
         return $this->json($user->getId());
@@ -39,7 +39,7 @@ class UserController extends AbstractController
         try {
             $user = $this->userService->editUser($id, $name, $email);
         } catch (\Exception $e) {
-            return $this->json(['error' => $e->getMessage()], $e->getCode());
+            return $this->json(['error' => $e->getMessage()]);
         }
 
         return $this->json($user->getId());
@@ -52,7 +52,7 @@ class UserController extends AbstractController
         try {
             $user = $this->userService->removeUser($id);
         } catch (\Exception $e) {
-            return $this->json(['error' => $e->getMessage()], $e->getCode());
+            return $this->json(['error' => $e->getMessage()]);
         }
 
         return $this->json($user->getId());
@@ -70,7 +70,7 @@ class UserController extends AbstractController
         try {
             $user = $this->userService->getActiveUser($id);
         } catch (\Exception $e) {
-            return $this->json(['error' => $e->getMessage()], $e->getCode());
+            return $this->json(['error' => $e->getMessage()]);
         }
 
         return $this->json($user->toArray());

@@ -30,7 +30,7 @@ class WorkEntryService
         }
 
         $workEntry = new WorkEntry();
-        $workEntry->setUserId($user)
+        $workEntry->setUser($user)
             ->setCreatedAt($today)
             ->setUpdatedAt($today)
             ->setStartDate($startDate)
