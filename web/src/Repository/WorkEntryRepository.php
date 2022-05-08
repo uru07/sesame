@@ -33,7 +33,7 @@ class WorkEntryRepository extends ServiceEntityRepository
     public function getActiveWorkEntryByUserId(int $userId): array
     {
         $qb = $this->createQueryBuilder('workEntry')
-            ->andWhere('workEntry.userId = :id')
+            ->andWhere('workEntry.user = :id')
             ->andWhere('workEntry.deletedAt IS NULL')
             ->setParameter('id', $userId)
         ;

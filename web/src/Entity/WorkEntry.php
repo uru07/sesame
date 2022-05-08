@@ -135,7 +135,7 @@ class WorkEntry
     {
         return [
             'id' => $this->id,
-            'userId' => $this->user,
+            'userId' => $this->user->toArray(),
             'created_at' => $this->createdAt,
             'updated_at' => $this->updatedAt,
             'startDate' => $this->startDate,
