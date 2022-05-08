@@ -35,4 +35,22 @@ class WorkEntryService
 
         return $workEntry;
     }
+
+    public function editWorkEntry(int $id, string $startDate, ?string $endDate): WorkEntry
+    {
+        $workEntry = $this->workEntryRepository->getActiveWorkEntryById($id);
+        if (is_null($workEntry)) {
+            throw new \Exception('Work entry not found');
+        }
+
+        $today = new \DateTime();
+
+        $workEntry->setUpdatedAt($today)
+            ->setStartDate(new \DateTime($startDate))
+            ->setEndDate($endDate ? new \DateTime($endDate) : $endDate)
+        ;
+        $this->workEntryRepository->persist($workEntry);
+
+        return $workEntry;
+    }
 }

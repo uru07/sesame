@@ -31,4 +31,19 @@ class WorkEntryController extends AbstractController
 
         return $this->json($workEntry->getId());
     }
+
+    public function editWorkEntry(Request $request): JsonResponse
+    {
+        $id = $request->request->get('id');
+        $startDate = $request->request->get('startDate');
+        $endDate = $request->request->get('endDate', null);
+
+        try {
+            $user = $this->workEntryService->editWorkEntry($id, $startDate, $endDate);
+        } catch (\Exception $e) {
+            return $this->json(['error' => $e->getMessage()], $e->getCode());
+        }
+
+        return $this->json($user->getId());
+    }
 }

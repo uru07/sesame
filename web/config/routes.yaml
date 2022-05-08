@@ -27,3 +27,8 @@ app_work_entry_add:
     path: /work-entry
     controller: App\Controller\WorkEntryController::addWorkEntry
     methods: [POST]
+
+app_work_entry_edit:
+    path: /work-entry
+    controller: App\Controller\WorkEntryController::editWorkEntry
+    methods: [PUT]
